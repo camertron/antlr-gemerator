@@ -1,0 +1,43 @@
+#! /usr/bin/env ruby
+
+require 'gli'
+require 'antlr-gemerator'
+
+program_desc 'Generate a full Rubygem from an ANTLR grammar.'
+
+version AntlrGemerator::VERSION
+
+subcommand_option_handling :normal
+arguments :strict
+
+desc 'Generate a full Rubygem from an ANTLR grammar.'
+command :create do |c|
+  c.desc 'Grammar file'
+  c.flag [:g, :grammar], type: String, multiple: true, required: true
+
+  c.desc 'Output directory'
+  c.default_value '.'
+  c.flag [:o, :output, type: String
+
+  c.desc 'Root ANTLR context'
+  c.flag [:r, :root], type: String, required: true
+
+  c.desc "Gem author's name"
+  c.flag [:a, :author], type: String, required: true
+
+  c.desc "Gem author's email address"
+  c.flag [:e, :email], type: String, required: true
+
+  c.desc "Gem's homepage"
+  c.flag [:h, :homepage], type: String, required: true
+
+  c.desc "Gem's description"
+  c.flag [:d, :desc], type: String, required: true
+
+  c.action do |global_options, options, args|
+    AntlrGemerator.create(options)
+  end
+end
+
+exit run(ARGV)
+
