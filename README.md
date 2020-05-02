@@ -92,7 +92,7 @@ print
 print
 ```
 
-The `MyFuncVisitor` class passed to `Parser#visit` prints the name of each function call, then visits the child contexts in the parsed subtree.
+The `MyFuncVisitor` instance passed to `Parser#visit` prints the name of each function call, then visits the child contexts in the parsed subtree.
 
 ## Publishing your gem
 
@@ -114,7 +114,7 @@ You'll need to be signed into rubygems.org before publishing. Take a look at thi
 
 Each gem created by antlr-gemerator comes with several rake tasks to help make maintenance easier.
 
-1. `build`: build the gem into a .gem file suitable for publishing to rubygems.org.
+1. `build`: builds the gem into a .gem file suitable for publishing to rubygems.org.
 2. `compile`: builds the native extension (i.e. compiles all the generated C++ code and the ANTLR runtime).
 3. `generate`: regenerates the C++ code by invoking antlr4-native. It's like running `antlr-gemerator` all over again, but _after_ your gem has been created.
 
