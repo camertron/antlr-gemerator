@@ -26,10 +26,8 @@ include_paths.each do |include_path|
   $INCFLAGS << " -I#{include_path}"
   $VPATH << include_path
 
-  Dir.chdir('ext/<%= gem_name %>') do
-    Dir.glob("#{include_path}/*.cpp").each do |path|
-      $srcs << path
-    end
+  Dir.glob("#{include_path}/*.cpp").each do |path|
+    $srcs << path
   end
 end
 

@@ -1,20 +1,26 @@
 require 'fileutils'
 require 'antlr4-native'
+require 'etc'
 
 module AntlrGemerator
   autoload :Template, 'antlr-gemerator/template'
 
   class << self
     def create(options)
-      # ANTLR does weird things if you tell it to generate parsers anywhere
-      # other than the current directory. For that reason, hard-code the
-      # root directory to the current dir to avoid confusion.
       root_dir = '.'
       lib_dir = File.join(root_dir, 'lib')
       ext_dir = File.join(root_dir, 'ext')
 
+      # ANTLR does weird things if the grammar file isn't in the current
+      # working directory
+      grammars = options[:grammar].map do |g|
+        local_g = File.join(root_dir, File.basename(g))
+        FileUtils.cp(g, local_g)
+        local_g
+      end
+
       generator = Antlr4Native::Generator.new(
-        grammar_files:      options[:grammar],
+        grammar_files:      grammars,
         output_dir:         ext_dir,
         parser_root_method: options[:root]
       )
@@ -27,7 +33,7 @@ module AntlrGemerator
         gem_author_email:    options[:email],
         gem_homepage:        options[:homepage] || '',
         gem_description:     options[:desc],
-        grammar_files_array: options[:grammar],
+        grammar_files_array: grammars,
         root_method:         options[:root]
       }
 
@@ -36,11 +42,6 @@ module AntlrGemerator
       render 'Gemfile.erb', File.join(root_dir, 'Gemfile'), bindings
       render 'gemspec.erb', File.join(root_dir, "#{bindings[:gem_name]}.gemspec"), bindings
       render 'Rakefile.erb', File.join(root_dir, 'Rakefile'), bindings
-
-      # copy grammar files to output dir
-      options[:grammar].each do |grammar_file|
-        FileUtils.cp(grammar_file, File.join(root_dir, grammar_file))
-      end
 
       # lib
       mkdir File.join(lib_dir, bindings[:gem_name])
@@ -54,7 +55,8 @@ module AntlrGemerator
 
       mkdir File.join(ext_dir, bindings[:gem_name])
 
-      extconf_path = File.join(ext_dir, bindings[:gem_name], 'extconf.rb')
+      extension_dir = File.join(ext_dir, bindings[:gem_name])
+      extconf_path = File.join(extension_dir, 'extconf.rb')
       render 'extconf.rb.erb', extconf_path, bindings
 
       run 'git init', root_dir
@@ -68,8 +70,8 @@ module AntlrGemerator
       bx 'bundle install', root_dir
 
       # build
-      bx "ruby #{extconf_path}", root_dir
-      run 'make -j 4', root_dir
+      bx "ruby extconf.rb", extension_dir
+      run "make -j #{Etc.nprocessors}", extension_dir
     end
 
     private

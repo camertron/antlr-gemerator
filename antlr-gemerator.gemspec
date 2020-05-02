@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'antlr4-native', '~> 1.0'
   s.add_dependency 'gli', '~> 2.0'
 
+  s.executables << 'antlr-gemerator'
+
   s.require_path = 'lib'
   s.files = Dir['{lib,spec}/**/*', 'Gemfile', 'README.md', 'Rakefile', 'antlr-gemerator.gemspec']
 end
