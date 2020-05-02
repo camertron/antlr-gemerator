@@ -50,7 +50,7 @@ antlr-gemerator create \
   --root chunk
 ```
 
-**NOTE**: You can specify the `-g` option more than once, i.e. for each .g4 file. It's common for the parser and lexer in ANTLR grammars to exist in individual files.
+**NOTE**: You can specify the `--grammar` option more than once, i.e. for each .g4 file. It's common for the parser and lexer in ANTLR grammars to exist in individual files.
 
 **NOTE**: The `--root` option tells antlr-gemerator which context represents the root of the parse tree. This context functions as the starting point for visitors. Look inside your .g4 file (the parser one if there is more than one) and find the first grammar element. For the Lua grammar, this root element is called `chunk`.
 
