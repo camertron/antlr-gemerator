@@ -3,21 +3,19 @@
 require 'gli'
 require 'antlr-gemerator'
 
-program_desc 'Generate a full Rubygem from an ANTLR grammar.'
+include GLI::App
+
+program_desc 'Generate a complete Rubygem from an ANTLR grammar.'
 
 version AntlrGemerator::VERSION
 
 subcommand_option_handling :normal
 arguments :strict
 
-desc 'Generate a full Rubygem from an ANTLR grammar.'
+desc 'Generate a complete Rubygem from an ANTLR grammar.'
 command :create do |c|
   c.desc 'Grammar file'
   c.flag [:g, :grammar], type: String, multiple: true, required: true
-
-  c.desc 'Output directory'
-  c.default_value '.'
-  c.flag [:o, :output, type: String
 
   c.desc 'Root ANTLR context'
   c.flag [:r, :root], type: String, required: true

@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.description = s.summary = 'Generate a complete Rubygem from any ANTLR4 grammar.'
 
   s.platform = Gem::Platform::RUBY
-  s.has_rdoc = true
 
   s.add_dependency 'antlr4-native', '~> 1.0'
   s.add_dependency 'gli', '~> 2.0'

@@ -1,5 +1,7 @@
 require 'bundler'
+
 require 'antlr4-native'
+require 'etc'
 
 Bundler::GemHelper.install_tasks
 
@@ -11,4 +13,11 @@ task :generate do
   )
 
   generator.generate
+end
+
+task :compile do
+  Dir.chdir(File.join(%w(ext <%= gem_name %>))) do
+    load 'extconf.rb'
+    exec "make -j #{Etc.nprocessors}"
+  end
 end

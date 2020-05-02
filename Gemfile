@@ -2,8 +2,11 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'antlr4-native', path: '~/workspace/antlr4-native-rb'
+group :development do
+  gem 'pry-byebug'
+  gem 'antlr4-native'
+end
 
 group :development, :test do
-  gem 'pry-byebug'
+  gem 'rake'
 end

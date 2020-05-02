@@ -1,6 +1,6 @@
 require 'mkmf-rice'
 
-extension_name = 'build/<%= gem_name %>'
+extension_name = '<%= ext_name %>'
 dir_config(extension_name)
 
 have_library('stdc++')
@@ -23,8 +23,8 @@ include_paths = [
 $srcs = []
 
 include_paths.each do |include_path|
-  $INCFLAGS << " -I$(srcdir)/#{include_path}"
-  $VPATH << "$(srcdir)/#{include_path}"
+  $INCFLAGS << " -I#{include_path}"
+  $VPATH << include_path
 
   Dir.chdir('ext/<%= gem_name %>') do
     Dir.glob("#{include_path}/*.cpp").each do |path|
