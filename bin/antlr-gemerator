@@ -2,6 +2,7 @@
 
 require 'gli'
 require 'antlr-gemerator'
+require 'antlr-gemerator/version'
 
 include GLI::App
 

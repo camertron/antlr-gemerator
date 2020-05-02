@@ -93,7 +93,13 @@ module AntlrGemerator
     end
 
     def bx(cmd, in_dir)
-      Bundler.with_clean_env { run(cmd, in_dir) }
+      runner = -> { run(cmd, in_dir) }
+
+      if Kernel.const_defined?(:Bundler)
+        Bundler.with_clean_env(&runner)
+      else
+        runner.call
+      end
     end
 
     def template_dir
