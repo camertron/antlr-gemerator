@@ -52,6 +52,8 @@ antlr-gemerator create \
 
 **NOTE**: You can specify the `-g` option more than once, i.e. for each .g4 file. It's common for the parser and lexer in ANTLR grammars to exist in individual files.
 
+**NOTE**: The `--root` option tells antlr-gemerator which context represents the root of the parse tree. This context functions as the starting point for visitors. Look inside your .g4 file (the parser one if there is more than one) and find the first grammar element. For the Lua grammar, this root element is called `chunk`.
+
 You should see a bunch of console output as antlr-gemerator emits all the files necessary for a Lua parser gem. It will also add the ANTLR runtime as a git submodule and build the native extension for you.
 
 ### Using your gem
