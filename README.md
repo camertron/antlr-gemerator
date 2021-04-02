@@ -4,7 +4,7 @@ Generate a complete Rubygem from any ANTLR grammar.
 
 ## What is this thing?
 
-This gem leverages the functionality in [antlr4-native](https://github.com/camertron/antlr4-native) to generate a complete rubygem from an ANTLR grammar. The resulting gem contains a working parser and visitor, and is ready to be published to rubygems.org.
+This gem leverages the functionality in [antlr4-native-rb](https://github.com/camertron/antlr4-native-rb) to generate a complete rubygem from an ANTLR grammar. The resulting gem contains a working parser and visitor, and is ready to be published to rubygems.org.
 
 ## Background
 
