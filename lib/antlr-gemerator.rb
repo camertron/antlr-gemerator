@@ -62,7 +62,7 @@ module AntlrGemerator
       run 'git init', root_dir
 
       # git is very stupid and won't let me pass a tag to git submodule add
-      run "git submodule add git://github.com/antlr/antlr4 #{antlr_upstream_dir}", root_dir
+      run "git submodule add https://github.com/antlr/antlr4 #{antlr_upstream_dir}", root_dir
       Dir.chdir(antlr_upstream_dir) { run "git checkout #{antlr_version}" }
 
       generator.generate
