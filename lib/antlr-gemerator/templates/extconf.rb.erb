@@ -7,6 +7,8 @@ have_library('stdc++')
 
 $CFLAGS << ' -std=c++14'
 
+$defs.push '-DANTLR4CPP_STATIC' unless $defs.include?('-DANTLR4CPP_STATIC')
+
 include_paths = [
   '.',
   'antlrgen',
