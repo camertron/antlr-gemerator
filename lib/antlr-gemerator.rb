@@ -28,7 +28,7 @@ module AntlrGemerator
       bindings = {
         gem_name:            generator.gem_name,
         ext_name:            generator.ext_name,
-        gem_namespace:       generator.parser_ns,
+        gem_namespace:       generator.capitalize(generator.parser_ns),
         gem_author_name:     options[:author],
         gem_author_email:    options[:email],
         gem_homepage:        options[:homepage] || '',
