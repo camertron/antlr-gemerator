@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.platform = Gem::Platform::RUBY
 
-  s.add_dependency 'antlr4-native', '~> 2.1'
+  s.add_dependency 'antlr4-native', '~> 2.2'
   s.add_dependency 'gli', '~> 2.0'
 
   s.executables << 'antlr-gemerator'
